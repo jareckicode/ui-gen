@@ -13,7 +13,6 @@ Automatyczny generator komponentów React/TypeScript z szablonami testów (Jest 
 
 ```bash
 npm install
-yarn install
 ```
 
 ## Budowanie
@@ -101,3 +100,14 @@ npx @jareckicode/ui-gen create MySidebar --tag aside --classes "w-64 bg-gray-200
 
 ## Licencja
 MIT 
+
+## Autor
+
+**Michał Jarecki**
+
+- 🌐 [Strona internetowa](https://jareckiweb.pl)
+-  [Email](mailto:jarecki.kontakt@gmail.com)
+
+## Licencja
+
+MIT License - zobacz plik [LICENSE](LICENSE) dla szczegółów. 

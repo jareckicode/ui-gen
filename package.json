@@ -15,8 +15,8 @@
     "test:coverage": "jest --coverage"
   },
   "keywords": ["react", "typescript", "cli", "generator", "tailwind"],
-  "author": "",
-  "license": "ISC",
+  "author": "Michał Jarecki",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^29.5.8",
     "@types/node": "^20.8.10",
