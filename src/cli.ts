@@ -19,11 +19,10 @@ program
   .option('-d, --directory <path>', 'Directory to create component in', 'src/components')
   .option('-c, --classes <classes>', 'Default Tailwind classes', 'p-4 border rounded')
   .option('-t, --tag <tag>', 'HTML tag to use (div, button, section, aside, etc.)', 'div')
-  .option('--no-index', 'Skip generating index.ts file')
-  .action(async (componentName: string, options: { directory: string; classes: string; tag: string; 'no-index'?: boolean }) => {
+  .option('--no-index', 'Skip generating index.ts file', false)
+  .action(async (componentName: string, options: { directory: string; classes: string; tag: string; index?: boolean }) => {
     try {
       console.log(chalk.blue(`🚀 Creating component: ${componentName}`));
-      
       // Walidacja nazwy komponentu
       if (!/^[A-Z][a-zA-Z0-9]*$/.test(componentName)) {
         console.error(chalk.red('❌ Component name must start with uppercase letter and contain only letters and numbers'));
@@ -54,8 +53,8 @@ program
         { template: 'story.tsx.tpl', output: generateFileName(componentName, 'stories.tsx') }
       ];
 
-      // Dodaj index.ts tylko jeśli nie użyto --no-index
-      if (!options['no-index']) {
+      // Dodaj index.ts tylko jeśli index nie jest false
+      if (options.index !== false) {
         filesToGenerate.push({ template: 'index.ts.tpl', output: 'index.ts' });
       }
 
