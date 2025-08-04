@@ -10,7 +10,7 @@ const path_1 = __importDefault(require("path"));
 const fileUtils_1 = require("./utils/fileUtils");
 const program = new commander_1.Command();
 program
-    .name('react-tail-gen')
+    .name('ui-gen')
     .description('CLI generator for React components with TypeScript, Tailwind CSS, and testing setup')
     .version('1.0.0');
 program
@@ -20,6 +20,7 @@ program
     .option('-d, --directory <path>', 'Directory to create component in', 'src/components')
     .option('-c, --classes <classes>', 'Default Tailwind classes', 'p-4 border rounded')
     .option('-t, --tag <tag>', 'HTML tag to use (div, button, section, aside, etc.)', 'div')
+    .option('--no-index', 'Skip generating index.ts file')
     .action(async (componentName, options) => {
     try {
         console.log(chalk_1.default.blue(`🚀 Creating component: ${componentName}`));
@@ -46,9 +47,12 @@ program
         const filesToGenerate = [
             { template: 'component.tsx.tpl', output: (0, fileUtils_1.generateFileName)(componentName, 'tsx') },
             { template: 'test.tsx.tpl', output: (0, fileUtils_1.generateFileName)(componentName, 'test.tsx') },
-            { template: 'story.tsx.tpl', output: (0, fileUtils_1.generateFileName)(componentName, 'stories.tsx') },
-            { template: 'index.ts.tpl', output: 'index.ts' }
+            { template: 'story.tsx.tpl', output: (0, fileUtils_1.generateFileName)(componentName, 'stories.tsx') }
         ];
+        // Dodaj index.ts tylko jeśli nie użyto --no-index
+        if (!options['no-index']) {
+            filesToGenerate.push({ template: 'index.ts.tpl', output: 'index.ts' });
+        }
         // Generowanie plików
         for (const file of filesToGenerate) {
             const templatePath = path_1.default.join(templatesDir, file.template);

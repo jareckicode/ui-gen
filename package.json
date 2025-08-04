@@ -6,8 +6,13 @@
   "bin": {
     "ui-gen": "./dist/cli.js"
   },
+  "files": [
+    "dist/",
+    "src/templates/"
+  ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy-templates",
+    "copy-templates": "cp -r src/templates dist/",
     "dev": "tsc --watch",
     "start": "node dist/cli.js",
     "test": "jest",
