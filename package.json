@@ -1,6 +1,6 @@
 {
   "name": "@jareckicode/ui-gen",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI generator for React components with TypeScript, Tailwind CSS, and testing setup",
   "main": "dist/cli.js",
   "bin": {
@@ -19,7 +19,13 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
-  "keywords": ["react", "typescript", "cli", "generator", "tailwind"],
+  "keywords": [
+    "react",
+    "typescript",
+    "cli",
+    "generator",
+    "tailwind"
+  ],
   "author": "Michał Jarecki",
   "license": "MIT",
   "devDependencies": {
