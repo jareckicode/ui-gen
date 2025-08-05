@@ -19,8 +19,8 @@ program
   .option('-d, --directory <path>', 'Directory to create component in', 'src/components')
   .option('-c, --classes <classes>', 'Default Tailwind classes', 'p-4 border rounded')
   .option('-t, --tag <tag>', 'HTML tag to use (div, button, section, aside, etc.)', 'div')
-  .option('--no-index', 'Skip generating index.ts file', false)
-  .action(async (componentName: string, options: { directory: string; classes: string; tag: string; index?: boolean }) => {
+  .option('--skip-index', 'Skip generating index.ts file', false)
+  .action(async (componentName: string, options: { directory: string; classes: string; tag: string; skipIndex?: boolean }) => {
     try {
       console.log(chalk.blue(`🚀 Creating component: ${componentName}`));
       // Walidacja nazwy komponentu
@@ -54,7 +54,8 @@ program
       ];
 
       // Dodaj index.ts tylko jeśli index nie jest false
-      if (options.index !== false) {
+      if (!options.skipIndex) {
+        // Dodaj index.ts tylko gdy skipIndex nie jest true
         filesToGenerate.push({ template: 'index.ts.tpl', output: 'index.ts' });
       }
 

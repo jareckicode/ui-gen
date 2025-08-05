@@ -45,6 +45,7 @@ src/components/MyButton/
 └── index.ts               # Eksport komponentu (opcjonalnie)
 ```
 
+
 ## Przykład szablonu testu
 
 ```tsx
@@ -55,13 +56,19 @@ import { MyButton } from './MyButton';
 describe('MyButton', () => {
   it('renders without crashing', () => {
     render(<MyButton />);
-    expect(screen.getByRole('generic')).toBeInTheDocument();
+    expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
   it('renders with correct HTML tag', () => {
     render(<MyButton />);
-    const element = screen.getByRole('generic');
+    const element = screen.getByRole('button');
     expect(element.tagName.toLowerCase()).toBe('button');
+  });
+
+  it('applies custom className', () => {
+    render(<MyButton className="custom-class" />);
+    const element = screen.getByRole('button');
+    expect(element).toHaveClass('custom-class');
   });
 
   // Add your tests here
@@ -73,7 +80,7 @@ describe('MyButton', () => {
 - `--directory` lub `-d` — katalog docelowy (domyślnie `src/components`)
 - `--classes` lub `-c` — domyślne klasy Tailwind (domyślnie `p-4 border rounded`)
 - `--tag` lub `-t` — tag HTML do użycia (domyślnie `div`)
-- `--no-index` — pomiń generowanie pliku index.ts
+- `--skip-index` — pomiń generowanie pliku index.ts
 
 ### Przykłady użycia:
 
@@ -88,7 +95,7 @@ npx @jareckicode/ui-gen create MyButton --tag button --classes "px-4 py-2 bg-blu
 npx @jareckicode/ui-gen create MySection --tag section --directory src/layouts --classes "p-6 bg-gray-100"
 
 # Aside bez pliku index.ts
-npx @jareckicode/ui-gen create MySidebar --tag aside --classes "w-64 bg-gray-200 p-4" --no-index
+npx @jareckicode/ui-gen create MySidebar --tag aside --classes "w-64 bg-gray-200 p-4" --skip-index
 ```
 
 ### Dostępne tagi HTML:
@@ -98,16 +105,13 @@ npx @jareckicode/ui-gen create MySidebar --tag aside --classes "w-64 bg-gray-200
 - Node.js >= 16
 - TypeScript
 
-## Licencja
-MIT 
-
 ## Autor
 
 **Michał Jarecki**
 
 - 🌐 [Strona internetowa](https://jareckiweb.pl)
--  [Email](mailto:jarecki.kontakt@gmail.com)
+- 📧 [Email](mailto:jarecki.kontakt@gmail.com)
 
 ## Licencja
 
-MIT License - zobacz plik [LICENSE](LICENSE) dla szczegółów. 
+MIT License

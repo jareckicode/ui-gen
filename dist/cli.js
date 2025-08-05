@@ -20,7 +20,7 @@ program
     .option('-d, --directory <path>', 'Directory to create component in', 'src/components')
     .option('-c, --classes <classes>', 'Default Tailwind classes', 'p-4 border rounded')
     .option('-t, --tag <tag>', 'HTML tag to use (div, button, section, aside, etc.)', 'div')
-    .option('--no-index', 'Skip generating index.ts file')
+    .option('--skip-index', 'Skip generating index.ts file', false)
     .action(async (componentName, options) => {
     try {
         console.log(chalk_1.default.blue(`🚀 Creating component: ${componentName}`));
@@ -49,8 +49,9 @@ program
             { template: 'test.tsx.tpl', output: (0, fileUtils_1.generateFileName)(componentName, 'test.tsx') },
             { template: 'story.tsx.tpl', output: (0, fileUtils_1.generateFileName)(componentName, 'stories.tsx') }
         ];
-        // Dodaj index.ts tylko jeśli nie użyto --no-index
-        if (!options['no-index']) {
+        // Dodaj index.ts tylko jeśli index nie jest false
+        if (!options.skipIndex) {
+            // Dodaj index.ts tylko gdy skipIndex nie jest true
             filesToGenerate.push({ template: 'index.ts.tpl', output: 'index.ts' });
         }
         // Generowanie plików
